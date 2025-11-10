@@ -117,3 +117,12 @@ select, input, textarea{
 }
 
 .footer-note{ color:var(--muted); font-size:12px; margin-top:8px; }
+
+.error-bar{
+  background: var(--red);
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}

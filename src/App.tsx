@@ -31,14 +31,31 @@ export default function App(){
   const [bookings, setBookings] = useState<Booking[]>([])
   const [modal, setModal] = useState<{open:boolean, resId?:string, date?:string}>({open:false})
   const [admin, setAdmin] = useState<{enabled:boolean, pass?:string}>({enabled:false})
+  const [error, setError] = useState<string|null>(null)
 
   useEffect(()=>{
-    listResources().then(setResources).catch(console.error)
-    listEmployees().then(setEmployees).catch(console.error)
+    async function load(){
+      try {
+        const [res, emps] = await Promise.all([ listResources(), listEmployees() ])
+        setResources(res)
+        setEmployees(emps)
+      } catch(err){
+        setError((err as Error).message)
+      }
+    }
+    load()
   },[])
 
   useEffect(()=>{
-    listBookingsForWeek(weekStart.toISOString().slice(0,10)).then(setBookings).catch(console.error)
+    async function load(){
+      try {
+        const bookings = await listBookingsForWeek(weekStart.toISOString().slice(0,10))
+        setBookings(bookings)
+      } catch(err){
+        setError((err as Error).message)
+      }
+    }
+    load()
   },[weekStart])
 
   const days = useMemo(()=> onlyWeekdays(Array.from({length:7},(_,i)=> addDays(weekStart,i))), [weekStart])
@@ -93,6 +110,7 @@ export default function App(){
 
   return (
     <div className="app">
+      {error && <div className="error-bar" onClick={()=> setError(null)}>{error}</div>}
       <div className="header">
         <h2>{import.meta.env.VITE_APP_TITLE || 'Scarlettabbott Parking'}</h2>
         <WeekNav weekStart={weekStart} onChange={setWeekStart} />
