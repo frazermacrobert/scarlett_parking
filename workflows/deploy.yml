@@ -23,28 +23,25 @@ jobs:
           node-version: 20
 
       - name: Create env file
-        working-directory: web
         run: |
           echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> .env
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}" >> .env
           echo "VITE_APP_TITLE=Scarlettabbott Parking" >> .env
 
       - name: Install deps
-        working-directory: web
         run: npm ci
 
       - name: Build
-        working-directory: web
         run: npm run build
 
       - name: SPA 404 copy
-        working-directory: web/dist
+        working-directory: dist
         run: cp index.html 404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/dist
+          path: dist
 
   deploy:
     needs: build
