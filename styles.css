@@ -1,0 +1,119 @@
+
+:root{
+  --beige:#f4efe9;
+  --paper:#f7f0e6;
+  --ink:#1f1b17;
+  --red:#c62828;
+  --muted:#6b5e55;
+  --ok:#217a3c;
+  --pending:#a36b00;
+  --rail:rgba(0,0,0,.06);
+}
+
+*{ box-sizing:border-box; }
+html,body,#root{ height:100%; }
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% 0%, #ffe7cf 0%, rgba(255,231,207,0) 60%),
+    radial-gradient(800px 600px at 100% 100%, #fde6e6 0%, rgba(253,230,230,0) 55%),
+    var(--paper);
+}
+
+.app{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.weeknav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+button{
+  padding:8px 12px;
+  border:1px solid var(--rail);
+  background:#fff;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+button.primary{
+  background:var(--red);
+  color:#fff;
+  border-color:transparent;
+}
+
+.iconbtn{
+  width:36px; height:36px; display:inline-grid; place-items:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap:16px;
+  margin-top:16px;
+}
+
+.scene{
+  background: #fff;
+  border:1px solid var(--rail);
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+}
+
+.panel{
+  background: #fff;
+  border:1px solid var(--rail);
+  border-radius:16px;
+  padding:16px;
+}
+
+.slot{
+  stroke: #5e564f;
+  stroke-width:2;
+  fill:#fff8;
+}
+
+.slot.pending{ fill:#fff3; stroke-dasharray:6 4; }
+.slot.confirmed{ fill:#fde6e6; }
+
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 8px; border-radius:999px; font-size:12px; border:1px solid var(--rail);
+  background:#fff; color:var(--ink);
+}
+
+.badge.pending{ background:#fff7e6; border-color:#f0d9ad; }
+.badge.confirmed{ background:#fbe8ea; border-color:#f5c2c7; color:var(--red); }
+
+.waitlist li{
+  display:flex; align-items:center; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--rail);
+}
+.waitlist li:last-child{ border-bottom:0; }
+
+.modal{
+  position:fixed; inset:0; background:rgba(0,0,0,.3);
+  display:grid; place-items:center; padding:16px;
+}
+.modal-card{
+  max-width:420px; width:100%; background:#fff; border-radius:12px; padding:16px; border:1px solid var(--rail);
+}
+label{ display:block; margin:8px 0 4px; font-size:14px; color:var(--muted); }
+select, input, textarea{
+  width:100%; padding:10px; border:1px solid var(--rail); border-radius:10px; background:#fff;
+}
+
+.footer-note{ color:var(--muted); font-size:12px; margin-top:8px; }
